@@ -2,25 +2,31 @@
 import React, { PropsWithChildren } from "react";
 import { Inter as FontSans } from "next/font/google"
 // import { PageLayout } from "@/components/page-layout";
+import './globals.css'
 
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { Inter } from 'next/font/google'
+import { cn } from "@/lib/utils"
+import PageHeader from "@/components/page-header";
 
-// If loading a variable font, you don't need to specify the font weight
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
 })
+
 
 // export const metadata = siteMetadata;
 
 
 const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       {/* <PreloadResources /> */}
-      <body >
+      <body className={cn(
+        "min-h-screen bg-background font-sans antialiased",
+        fontSans.variable
+      )} >
         <UserProvider>
+          <PageHeader />
           <div>{children}</div>
         </UserProvider>
       </body>
