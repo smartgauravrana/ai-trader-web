@@ -32,6 +32,10 @@ export const columns: ColumnDef<Customer>[] = [
     header: "Email",
   },
   {
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
     id: "actions",
     header: "Actions",
     enableHiding: false,
@@ -51,11 +55,11 @@ export const columns: ColumnDef<Customer>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(customer.id)}
             >
-              Copy payment ID
+              Copy Phone
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Edit customer</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
