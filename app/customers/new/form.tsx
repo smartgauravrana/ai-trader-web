@@ -28,7 +28,7 @@ const formSchema = z.object({
   fyersRedirectUrl: z.string().nonempty("Fyers Redirect Url is required"),
   // telegramBotToken: z.string().optional(),
   // telegramNotificationChannel: z.string().optional(),
-  status: z.nativeEnum(CustomerStatus).optional(),
+  // status: z.string().optional(),
 });
 type InputFieldType = { name: string; label: string; placeholder: string };
 const inputFields: InputFieldType[] = [
@@ -90,7 +90,8 @@ export function ProfileForm() {
       fyersRedirectUrl: "",
       // telegramBotToken: "",
       // telegramNotificationChannel: "",
-      status: CustomerStatus.ACTIVE,
+      // status: CustomerStatus.ACTIVE,
+      // status: CustomerStatus.ACTIVE,
     },
   });
 
@@ -114,18 +115,18 @@ export function ProfileForm() {
       // ...
     } catch (error) {
       // Capture the error message to display to the user
-      setError(error.message);
+
       console.error(error);
     } finally {
-      setIsLoading(false);
     }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        {inputFields.map((input) => (
+        {inputFields.map((input, idx) => (
           <FormField
+            key={idx}
             control={form.control}
             name={input.name as any}
             render={({ field }) => (

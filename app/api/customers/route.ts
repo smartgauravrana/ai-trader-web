@@ -1,7 +1,7 @@
 import { getCustomersList } from "@/lib/customers-db";
 import connectDB from "@/lib/db";
 import { createErrorResponse } from "@/lib/server-utils";
-import { CustomerModel } from "@/models/Customer";
+import { Customer, CustomerModel } from "@/models/Customer";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -35,7 +35,7 @@ export const POST = async (request: NextRequest) => {
   try {
     await connectDB();
 
-    const data = await request.json();
+    const data: Customer = await request.json();
 
     const res = await CustomerModel.create(data);
 

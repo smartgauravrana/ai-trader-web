@@ -1,12 +1,18 @@
-import { CustomerStatus } from "@/types/Customer";
 import {
   prop,
   getModelForClass,
   modelOptions,
   post,
 } from "@typegoose/typegoose";
-import { TimeStamps, Base } from "@typegoose/typegoose/lib/defaultClasses";
+import { Base } from "@typegoose/typegoose/lib/defaultClasses";
 import { Types } from "mongoose";
+
+// Enum for status
+enum CustomerStatus {
+  ACTIVE = "active",
+  PAUSED = "paused",
+  INACTIVE = "inactive",
+}
 
 @modelOptions({
   schemaOptions: {
@@ -81,6 +87,9 @@ export class Customer extends BaseEntity {
 
   @prop({ enum: CustomerStatus, default: CustomerStatus.ACTIVE })
   status!: CustomerStatus;
+
+  // @prop({ default: "active" })
+  // status!: string;
 }
 
 // Create the Customer model
