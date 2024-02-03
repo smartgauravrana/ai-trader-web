@@ -1,16 +1,31 @@
-import { getSession } from '@auth0/nextjs-auth0';
+import { getCustomersList } from "@/lib/customers-db";
+import { Payment, columns } from "./columns";
+import { DataTable } from "./data-table";
+import { PaginatedResponse } from "@/types/PaginatedResponse";
+import { Customer } from "@/models/Customer";
 
-export default async function CustomerManagement() {
-  const session = await getSession();
-  const user = session?.user;
+async function getData(): Promise<PaginatedResponse<Customer>> {
+  // Fetch data from your API here.
+  const data = await getCustomersList();
+  console.log("data: ", data);
+  return data;
+  // return [
+  //   {
+  //     id: "728ed52f",
+  //     amount: 100,
+  //     status: "pending",
+  //     email: "m@example.com",
+  //   },
+  //   // ...
+  // ];
+}
+
+export default async function CustomersPage() {
+  const data = await getData();
 
   return (
-    user && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-      </div>
-    )
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data.data} />
+    </div>
   );
 }

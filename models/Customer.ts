@@ -1,9 +1,11 @@
 import {
   prop,
   getModelForClass,
-  Ref,
   modelOptions,
+  post,
 } from "@typegoose/typegoose";
+import { TimeStamps, Base } from "@typegoose/typegoose/lib/defaultClasses";
+import { Types } from "mongoose";
 
 // Enum for status
 enum CustomerStatus {
@@ -12,8 +14,41 @@ enum CustomerStatus {
   INACTIVE = "inactive",
 }
 
+@modelOptions({
+  schemaOptions: {
+    timestamps: { updatedAt: "modifiedAt" },
+    toObject: { virtuals: true },
+  },
+})
+export class BaseEntity implements Base {
+  _id!: Types.ObjectId;
+
+  id!: string;
+
+  @prop()
+  public updatedAt!: Date;
+
+  @prop()
+  public createdAt!: Date;
+}
+
+@post<Customer>("save", function (doc) {
+  if (doc) {
+    doc.id = doc._id.toString();
+    doc._id = doc.id;
+  }
+})
+@post<Customer[]>(/^find/, function (docs) {
+  // @ts-ignore
+  if (this.op === "find") {
+    docs.forEach((doc) => {
+      doc.id = doc._id.toString();
+      doc._id = doc.id as any;
+    });
+  }
+})
 @modelOptions({ schemaOptions: { timestamps: true } })
-export class Customer {
+export class Customer extends BaseEntity {
   @prop({ required: true })
   name!: string;
 

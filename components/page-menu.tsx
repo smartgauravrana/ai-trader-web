@@ -21,13 +21,15 @@ export default function Menu() {
       <MenubarMenu>
         <MenubarTrigger>Customers</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
-            <Link href={"/customers/new"}>
+          <Link href={"/customers/new"}>
+            <MenubarItem>
               {" "}
               Onboard Customer <MenubarShortcut>⌘N</MenubarShortcut>
-            </Link>
-          </MenubarItem>
-          <MenubarItem>Manage</MenubarItem>
+            </MenubarItem>
+          </Link>
+          <Link href={"/customers"}>
+            <MenubarItem> Manage</MenubarItem>
+          </Link>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>

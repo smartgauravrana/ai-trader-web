@@ -1,12 +1,15 @@
-import { CustomerModel } from "@/models/Customer";
+import { Customer, CustomerModel } from "@/models/Customer";
 import connectDB from "./db";
+import { PaginatedResponse } from "@/types/PaginatedResponse";
 
 interface Filter {
   page?: number;
   limit?: number;
 }
 
-export async function getCustomersList(filter: Filter = {}) {
+export async function getCustomersList(
+  filter: Filter = {}
+): Promise<PaginatedResponse<Customer>> {
   try {
     await connectDB();
 
@@ -14,13 +17,9 @@ export async function getCustomersList(filter: Filter = {}) {
     const limit = filter.limit ?? 10;
     const skip = (page - 1) * limit;
 
-    const customers = await CustomerModel.find()
-      .skip(skip)
-      .limit(limit)
-      .lean()
-      .exec();
+    const customers = await CustomerModel.find().skip(skip).limit(limit).lean();
 
-    const total = await CustomerModel.countDocuments({});
+    const total = await CustomerModel.countDocuments({}).lean();
 
     return {
       data: customers,
@@ -29,6 +28,6 @@ export async function getCustomersList(filter: Filter = {}) {
       total,
     };
   } catch (error) {
-    return { error };
+    return { error } as any;
   }
 }

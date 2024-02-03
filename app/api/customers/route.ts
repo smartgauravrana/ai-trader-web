@@ -1,6 +1,6 @@
 import { getCustomersList } from "@/lib/customers-db";
 import connectDB from "@/lib/db";
-import { createErrorResponse } from "@/lib/utils";
+import { createErrorResponse } from "@/lib/server-utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
