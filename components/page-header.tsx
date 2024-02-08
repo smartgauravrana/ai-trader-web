@@ -2,14 +2,24 @@ import React from "react";
 import PageMenu from "./page-menu";
 import { Button } from "./ui/button";
 
-import { getSession } from "@auth0/nextjs-auth0";
 import Link from "next/link";
+import { LoginDialog } from "./login-dialog";
+import { cookies } from "next/headers";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { getCurrentUser } from "@/app/apiCalls/profile";
+import { User } from "@/models/User";
 
 type Props = {};
 
+async function getSession() {
+  const res = await getCurrentUser();
+  console.log("res: ", res);
+  return { user: res.data as User };
+}
+
 async function PageHeader({}: Props) {
-  const session = await getSession();
-  const user = session?.user;
+  const { user } = await getSession();
+  console.log("user: ", user);
 
   return (
     <div className="bg-slate-900">
@@ -28,12 +38,10 @@ async function PageHeader({}: Props) {
         <div>
           {user?.name ? (
             <Button variant="link" className="text-white">
-              <a href="/api/auth/logout">Logout</a>
+              <a href="/api/logout">Logout</a>
             </Button>
           ) : (
-            <Button variant="link" className="text-white">
-              <a href="/api/auth/login">Login</a>
-            </Button>
+            <LoginDialog />
           )}
         </div>
       </div>

@@ -4,7 +4,6 @@ import { Inter as FontSans } from "next/font/google";
 // import { PageLayout } from "@/components/page-layout";
 import "./globals.css";
 
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { cn } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
 
@@ -25,10 +24,8 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
           fontSans.variable
         )}
       >
-        <UserProvider>
-          <PageHeader />
-          <div>{children}</div>
-        </UserProvider>
+        <PageHeader />
+        <div>{children}</div>
       </body>
     </html>
   );
