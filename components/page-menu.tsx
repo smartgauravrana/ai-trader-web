@@ -1,3 +1,4 @@
+import { getSession } from "@/app/actions/session";
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -14,19 +15,22 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import Link from "next/link";
+import { InviteCustomer } from "./invite-customer";
 
-export default function Menu() {
+type MenuProps = {
+  isAdmin: boolean;
+};
+
+export default function Menu({ isAdmin }: MenuProps) {
+  console.log("isAdmin: ", isAdmin);
   return (
     <Menubar>
       <MenubarMenu>
         <MenubarTrigger>Customers</MenubarTrigger>
+
         <MenubarContent>
-          <Link href={"/customers/new"}>
-            <MenubarItem>
-              {" "}
-              Onboard Customer <MenubarShortcut>⌘N</MenubarShortcut>
-            </MenubarItem>
-          </Link>
+          <InviteCustomer />
+
           <Link href={"/customers"}>
             <MenubarItem> Manage</MenubarItem>
           </Link>
@@ -34,29 +38,6 @@ export default function Menu() {
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Reports</MenubarTrigger>
-        {/* <MenubarContent>
-          <MenubarItem>
-            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-          </MenubarItem>
-          <MenubarSeparator />
-          <MenubarSub>
-            <MenubarSubTrigger>Find</MenubarSubTrigger>
-            <MenubarSubContent>
-              <MenubarItem>Search the web</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Find...</MenubarItem>
-              <MenubarItem>Find Next</MenubarItem>
-              <MenubarItem>Find Previous</MenubarItem>
-            </MenubarSubContent>
-          </MenubarSub>
-          <MenubarSeparator />
-          <MenubarItem>Cut</MenubarItem>
-          <MenubarItem>Copy</MenubarItem>
-          <MenubarItem>Paste</MenubarItem>
-        </MenubarContent> */}
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>

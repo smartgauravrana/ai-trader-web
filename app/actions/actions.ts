@@ -30,6 +30,9 @@ export async function apiCallV2<T>(
 
     if (!response.ok) {
       console.error(`Request failed with status code ${response.status}`);
+      const data = await response.json();
+      console.log("error________________: ", data);
+      throw new Error(data?.message || data?.error || "Something went wrong!");
     }
 
     const cookieRes = response.headers.getSetCookie();

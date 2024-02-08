@@ -4,22 +4,13 @@ import { Button } from "./ui/button";
 
 import Link from "next/link";
 import { LoginDialog } from "./login-dialog";
-import { cookies } from "next/headers";
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-import { getCurrentUser } from "@/app/apiCalls/profile";
-import { User } from "@/models/User";
+
+import { getSession } from "@/app/actions/session";
 
 type Props = {};
 
-async function getSession() {
-  const res = await getCurrentUser();
-  console.log("res: ", res);
-  return { user: res.data as User };
-}
-
 async function PageHeader({}: Props) {
   const { user } = await getSession();
-  console.log("user: ", user);
 
   return (
     <div className="bg-slate-900">
@@ -31,7 +22,7 @@ async function PageHeader({}: Props) {
           </Link>
 
           <div className="ml-8">
-            <PageMenu />
+            {user?.isAdmin && <PageMenu isAdmin={Boolean(user?.isAdmin)} />}
           </div>
         </div>
         {/* right */}

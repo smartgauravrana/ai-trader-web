@@ -1,19 +1,21 @@
-import { Button } from "@/components/ui/button";
-import { getSession } from "@auth0/nextjs-auth0";
+import { getSession } from "./actions/session";
+import OnboardingSteps from "@/components/onboarding-steps";
 
 export default async function Home() {
   const session = await getSession();
   const user = session?.user;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex items-center text-3xl font-bold">
+    <main className="max-w-screen-xl mx-auto flex min-h-screen flex-col  justify-between py-12 ">
+      <div className="">
         {user?.name ? (
-          <div>Hey {user.name} 👋</div>
+          <div className="text-2xl mb-4 font-bold">Hey {user.name} 👋</div>
         ) : (
           <>
             <h1>Login to access Back Office 💀</h1>{" "}
           </>
         )}
+        {user?.name && <OnboardingSteps />}
       </div>
     </main>
   );

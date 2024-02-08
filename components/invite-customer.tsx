@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,37 +25,60 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginFormSchema } from "@/schemas/login-form";
 import { loginAction } from "@/app/apiCalls/login";
+import { getCurrentUser } from "@/app/apiCalls/profile";
+import { InviteFormSchema } from "@/schemas/invite";
+import { inviteAction } from "@/app/apiCalls/admin";
+import { MenubarItem } from "./ui/menubar";
 
-export function LoginDialog() {
-  const form = useForm<z.infer<typeof loginFormSchema>>({
-    resolver: zodResolver(loginFormSchema),
+export function InviteCustomer() {
+  const form = useForm<z.infer<typeof InviteFormSchema>>({
+    resolver: zodResolver(InviteFormSchema),
     defaultValues: {
       phone: "",
       password: "",
+      name: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof InviteFormSchema>) {
     try {
-      await loginAction(values);
+      await inviteAction(values);
+      alert("User created successfully!");
+      form.reset();
     } catch (e) {
-      alert("Wrong credentials");
+      alert("Something went wrong!");
     }
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Login</Button>
+        <Button variant="outline" className="w-full border-none justify-start">
+          Invite Customer
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Login</DialogTitle>
-          <DialogDescription>Provide your phone and password</DialogDescription>
+          <DialogTitle>Invite Customer</DialogTitle>
+          <DialogDescription>
+            Later share these details with customer
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Steve Jobs" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="phone"
@@ -81,6 +105,7 @@ export function LoginDialog() {
                   </FormItem>
                 )}
               />
+
               <div className="text-right">
                 <Button type="submit">Submit</Button>
               </div>

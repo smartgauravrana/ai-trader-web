@@ -3,6 +3,7 @@ import React, { PropsWithChildren } from "react";
 import { Inter as FontSans } from "next/font/google";
 // import { PageLayout } from "@/components/page-layout";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 import { cn } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
@@ -25,6 +26,7 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
         )}
       >
         <PageHeader />
+        <ToastContainer />
         <div>{children}</div>
       </body>
     </html>

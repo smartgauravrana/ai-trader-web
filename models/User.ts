@@ -7,8 +7,6 @@ export interface UserMetadata {
 
   botToken?: string;
 
-  fyersPin: string;
-
   telegramBotToken?: string;
 
   telegramNotificationChannel?: string;
@@ -25,6 +23,8 @@ export interface UserMetadata {
 }
 
 export interface User {
+  _id: string;
+
   name: string;
 
   phone: string;
