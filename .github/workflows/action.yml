@@ -1,4 +1,4 @@
-name: SSH into Remote Server
+name: Deploy trade webapp
 
 on:
   push:
@@ -24,3 +24,28 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             node -v
+
+      - name: Creating .env file
+        run: |
+          echo API_URL=${{ secrets.API_URL}} >> .env
+
+      - name: Deploy with rsync
+        run: |
+          rsync -avz * root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
+          rsync -avz .env root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
+
+      - name: SSH into Remote Server and Execute Command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "SSHing into remote server..."
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ~/app/ai-trader-web && npm i
+            npm run build
+            pm2 restart web --update-env
+            pm2 startup systemd
+            pm2 save
