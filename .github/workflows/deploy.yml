@@ -31,6 +31,7 @@ jobs:
       - name: Executing cmd on remote
         run: |
           echo 'Installing node_modules'
+          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && nvm use 18'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm i'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm run build'
           echo 'Starting pm2 web'
