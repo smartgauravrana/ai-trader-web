@@ -37,6 +37,7 @@ jobs:
       - name: Executing cmd on remote
         run: |
           echo 'Node Version'
+          ssh -y root@${{ secrets.SSH_HOST }} 'source ~/.bashrc'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && node -v'
           ssh -y root@${{ secrets.SSH_HOST }} 'node -v'
           ssh -y root@${{ secrets.SSH_HOST }} 'nvm list'
