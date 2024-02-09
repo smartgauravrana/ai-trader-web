@@ -40,7 +40,7 @@ jobs:
           # ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm i'
           # ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm run build'
           echo 'Starting pm2 web'
-          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && pm2 delete web'
+          ssh -y root@*** 'cd ~/app/ai-trader-web && pm2 delete web || true'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && pm2 start npm --name "web" -- start'
           ssh -y root@${{ secrets.SSH_HOST }} 'pm2 startup systemd'
           ssh -y root@${{ secrets.SSH_HOST }} 'pm2 save'
