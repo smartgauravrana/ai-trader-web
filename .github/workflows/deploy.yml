@@ -27,11 +27,12 @@ jobs:
         run: |
           rsync -avz * root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
           rsync -avz .env root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
-          rsync -avz .next root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
+          # rsync -avz .next root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
       - name: Executing cmd on remote
         run: |
           echo 'Installing node_modules'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm i'
+          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm run build'
           echo 'Starting pm2 web'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && pm2 restart web --update-env'
           ssh -y root@${{ secrets.SSH_HOST }} 'pm2 startup systemd'
