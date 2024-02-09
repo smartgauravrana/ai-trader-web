@@ -21,4 +21,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "SSHing into remote server..."
-            node --version
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            node -v
