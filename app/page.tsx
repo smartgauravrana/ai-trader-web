@@ -6,7 +6,7 @@ export default async function Home() {
   const user = session?.user;
 
   return (
-    <main className="max-w-screen-xl mx-auto flex min-h-screen flex-col  justify-between py-12 ">
+    <main className="max-w-screen-xl mx-auto flex min-h-screen flex-col  justify-between p-12 ">
       <div className="">
         {user?.name ? (
           <div className="text-2xl mb-4 font-bold">Hey {user.name} 👋</div>
