@@ -18,22 +18,27 @@ jobs:
           known_hosts: unnecessary
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Install node_modules
+        run: npm i
       - name: Creating .env file
         run: |
           echo API_URL=${{ secrets.API_URL}} >> .env
-      # - name: Build the project
-      #   run: yarn build
+      - name: Build the project
+        run: npm run build
+      - name: Listing files and remove node_modules
+        run: |
+          ls -a
+          rm -rf node_modules
       - name: Deploy with rsync
         run: |
           rsync -avz * root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
           rsync -avz .env root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
-          # rsync -avz .next root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
+          rsync -avz .next root@${{ secrets.SSH_HOST }}:./app/ai-trader-web
       - name: Executing cmd on remote
         run: |
           echo 'Installing node_modules'
-          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && nvm use 18'
-          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm i'
-          ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm run build'
+          # ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm i'
+          # ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && npm run build'
           echo 'Starting pm2 web'
           ssh -y root@${{ secrets.SSH_HOST }} 'cd ~/app/ai-trader-web && pm2 restart web --update-env'
           ssh -y root@${{ secrets.SSH_HOST }} 'pm2 startup systemd'
