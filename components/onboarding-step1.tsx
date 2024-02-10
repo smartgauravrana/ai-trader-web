@@ -73,7 +73,7 @@ export function OnboardingStep1({ user }: Props) {
   const onEdit = () => setIsDisabled(false);
 
   return (
-    <Card className="w-[380px]">
+    <Card className="w-full sm:w-[380px]">
       <CardHeader>
         <div className="flex justify-between">
           {" "}

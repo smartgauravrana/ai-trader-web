@@ -16,7 +16,7 @@ function OnboardingSteps() {
     <div>
       <h2 className="mb-4">Please complete below steps to start growing!</h2>
 
-      <div className="flex justify-around">
+      <div className="flex flex-col sm:flex-row justify-around">
         <OnboardingStep1 user={data.data} />
 
         <OnboardingStep2 user={data.data} />

@@ -34,7 +34,10 @@ export function OnboardingStep2({
     }
   };
   return (
-    <Card className={cn("w-[380px]", className)} {...props}>
+    <Card
+      className={cn("w-full sm:w-[380px] mt-6 sm:mt-0", className)}
+      {...props}
+    >
       <CardHeader>
         <CardTitle>Login with Fyers</CardTitle>
         <CardDescription>Need to automatically create Orders.</CardDescription>
