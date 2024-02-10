@@ -56,7 +56,7 @@ export function InviteCustomer() {
           Invite Customer
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[90%] sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Invite Customer</DialogTitle>
           <DialogDescription>

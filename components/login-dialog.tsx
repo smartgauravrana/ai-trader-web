@@ -47,7 +47,7 @@ export function LoginDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">Login</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[90%] sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Login</DialogTitle>
           <DialogDescription>Provide your phone and password</DialogDescription>

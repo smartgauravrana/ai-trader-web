@@ -18,11 +18,11 @@ async function PageHeader({}: Props) {
         {/* left */}
         <div className="flex  items-center">
           <Link href={"/"}>
-            <img src="/logo.png" className="h-14" />
+            <img src="/logo.png" className="h-8 sm:h-14" />
           </Link>
 
           <div className="ml-8">
-            {user?.isAdmin && <PageMenu isAdmin={Boolean(user?.isAdmin)} />}
+            <PageMenu isAdmin={Boolean(user?.isAdmin)} />
           </div>
         </div>
         {/* right */}

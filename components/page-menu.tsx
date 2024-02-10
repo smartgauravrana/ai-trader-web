@@ -25,20 +25,24 @@ export default function Menu({ isAdmin }: MenuProps) {
   console.log("isAdmin: ", isAdmin);
   return (
     <Menubar>
-      <MenubarMenu>
-        <MenubarTrigger>Customers</MenubarTrigger>
+      {isAdmin && (
+        <>
+          <MenubarMenu>
+            <MenubarTrigger>Customers</MenubarTrigger>
 
-        <MenubarContent>
-          <InviteCustomer />
+            <MenubarContent>
+              <InviteCustomer />
 
-          <Link href={"/customers"}>
-            <MenubarItem> Manage</MenubarItem>
-          </Link>
-        </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>Reports</MenubarTrigger>
-      </MenubarMenu>
+              <Link href={"/customers"}>
+                <MenubarItem> Manage</MenubarItem>
+              </Link>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Reports</MenubarTrigger>
+          </MenubarMenu>
+        </>
+      )}
       <MenubarMenu>
         <MenubarTrigger>
           <Link href={"/profile"}>My Profile</Link>
