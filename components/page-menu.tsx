@@ -22,7 +22,6 @@ type MenuProps = {
 };
 
 export default function Menu({ isAdmin }: MenuProps) {
-  console.log("isAdmin: ", isAdmin);
   return (
     <Menubar>
       {isAdmin && (
