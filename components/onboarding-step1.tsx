@@ -29,9 +29,19 @@ import { useState } from "react";
 
 const inputs = [
   {
+    name: "email",
+    label: "Email",
+    placeholder: "steve.job99@gmail.com",
+  },
+  {
     name: "fyersId",
     label: "Fyers Id",
     placeholder: "AGHGHSG",
+  },
+  {
+    name: "pin",
+    label: "Pin",
+    placeholder: "1234",
   },
   {
     name: "fyersAppId",
@@ -99,6 +109,7 @@ export function OnboardingStep1({ user }: Props) {
                     <FormControl>
                       <Input
                         disabled={isDisabled}
+                        readOnly={isDisabled}
                         placeholder={item.placeholder}
                         {...field}
                       />

@@ -46,10 +46,10 @@ export function OnboardingStep2({
         <div className=" flex items-center space-x-4 rounded-md border p-4">
           Status:{" "}
           <Badge
-            variant={user.metadata?.accessToken ? "default" : "destructive"}
+            variant={!user.isTokenExpired ? "default" : "destructive"}
             className="ml-4"
           >
-            {user.metadata?.accessToken ? "Linked" : " Not Linked"}
+            {!user.isTokenExpired ? "Linked" : " Not Linked"}
           </Badge>
         </div>
       </CardContent>
