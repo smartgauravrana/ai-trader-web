@@ -11,7 +11,7 @@ export const getCurrentUser = async () => {
 
 export const onboardingStep = async (
   userId: string,
-  data: { metadata: OnboardingRequest }
+  data: { email: string; metadata: any }
 ) => {
   return apiCallV2({
     endpoint: `/api/users/${userId}`,

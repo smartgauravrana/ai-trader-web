@@ -7,6 +7,8 @@ export interface UserMetadata {
 
   botToken?: string;
 
+  pin: string;
+
   telegramBotToken?: string;
 
   telegramNotificationChannel?: string;

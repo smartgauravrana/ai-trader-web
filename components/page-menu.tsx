@@ -38,7 +38,9 @@ export default function Menu({ isAdmin }: MenuProps) {
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
-            <MenubarTrigger>Reports</MenubarTrigger>
+            <MenubarTrigger>
+              <Link href={"/dashboard"}>Dashboard</Link>
+            </MenubarTrigger>
           </MenubarMenu>
         </>
       )}

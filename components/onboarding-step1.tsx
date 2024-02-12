@@ -68,12 +68,15 @@ export function OnboardingStep1({ user }: Props) {
       fyersAppId: user.metadata?.fyersAppId || "",
       fyersId: user.metadata?.fyersId || "",
       fyersSecretId: user.metadata?.fyersSecretId || "",
+      email: user.email || "",
+      pin: user.metadata?.pin || "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof OnboardingFormSchema>) {
     try {
-      await onboardingStep(user?._id, { metadata: values });
+      const { email, name, ...metadata } = values;
+      await onboardingStep(user?._id, { email, metadata });
       setIsDisabled(true);
     } catch (e) {
       alert("Wrong credentials");
