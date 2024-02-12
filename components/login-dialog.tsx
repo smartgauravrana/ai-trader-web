@@ -75,7 +75,7 @@ export function LoginDialog() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="secret" {...field} />
+                      <Input placeholder="secret" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
