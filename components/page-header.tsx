@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LoginDialog } from "./login-dialog";
 
 import { getSession } from "@/app/actions/session";
+import DrawerMenu from "./drawer-menu";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ async function PageHeader({}: Props) {
       <div className="max-w-screen-xl mx-auto bg-slate-900 flex justify-between p-4 items-center">
         {/* left */}
         <div className="flex  items-center">
+          <DrawerMenu isAdmin={!!user?.isAdmin} />
           <Link href={"/"}>
             <img src="/logo.png" className="h-8 sm:h-14" />
           </Link>
