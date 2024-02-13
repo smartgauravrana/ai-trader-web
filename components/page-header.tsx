@@ -18,7 +18,11 @@ async function PageHeader({}: Props) {
       <div className="max-w-screen-xl mx-auto bg-slate-900 flex justify-between p-4 items-center">
         {/* left */}
         <div className="flex  items-center">
-          <DrawerMenu isAdmin={!!user?.isAdmin} />
+          <div className="md:hidden">
+            {" "}
+            <DrawerMenu isAdmin={!!user?.isAdmin} />
+          </div>
+
           <Link href={"/"}>
             <img src="/logo.png" className="h-8 sm:h-14" />
           </Link>
