@@ -2,6 +2,7 @@ import { getDashboardData } from "@/app/apiCalls/admin";
 import React from "react";
 import DashboardCard from "./dashboard-card";
 import { nFormatter, numDifferentiation } from "@/lib/utils";
+import { FundsCharts } from "./dashboard-funds-chart";
 
 type Props = {};
 
@@ -43,6 +44,9 @@ async function Dashboard({}: Props) {
             )}
             iconType="currency"
           />
+        </div>
+        <div className="grid gap-4 md:grid-cols-1 ">
+          <FundsCharts />
         </div>
       </div>
     </div>
