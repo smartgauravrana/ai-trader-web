@@ -68,11 +68,13 @@ export default function DrawerMenu({ isAdmin }: DrawerProps) {
           ) : (
             <Button
               variant="outline"
-              className="mt-2"
+              className="mt-2 p-0 flex items-center justify-center"
               onClick={() => setOpen(!open)}
               key={idx}
             >
-              <Link href={item.href}>{item.label}</Link>
+              <Link className="w-full h-full" href={item.href}>
+                {item.label}
+              </Link>
             </Button>
           );
         })}
