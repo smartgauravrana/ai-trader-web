@@ -56,7 +56,10 @@ const data = [
 
 export function FundsCharts() {
   return (
-    <div className="mt-8 rounded-xl border bg-card text-card-foreground shadow col-span-4 p-4">
+    <div className="mt-8 rounded-xl border bg-card text-card-foreground shadow col-span-4">
+      <h3 className="font-semibold leading-none tracking-tight mb-2 p-4">
+        Overview
+      </h3>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart data={data}>
           <XAxis
