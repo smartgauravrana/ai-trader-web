@@ -35,6 +35,14 @@ async function Dashboard({}: Props) {
             value={numDifferentiation(res.data.highestActiveFund)}
             iconType="currency"
           />
+
+          <DashboardCard
+            title="Users Refresh Token Expired"
+            value={numDifferentiation(
+              res.data.userCountWithExpiredRefreshToken
+            )}
+            iconType="currency"
+          />
         </div>
       </div>
     </div>
