@@ -22,7 +22,7 @@ async function PageHeader({}: Props) {
           </Link>
 
           <div className="ml-8">
-            <PageMenu isAdmin={Boolean(user?.isAdmin)} />
+            {user?.name && <PageMenu isAdmin={Boolean(user?.isAdmin)} />}
           </div>
         </div>
         {/* right */}
