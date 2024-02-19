@@ -13,6 +13,7 @@ import {
 import { Badge } from "./ui/badge";
 import { User } from "@/models/User";
 import { getBrokerLoginUrl } from "@/app/apiCalls/profile";
+import { TradeControl } from "./trade-control";
 
 type Props = {
   user: User;
@@ -60,6 +61,10 @@ export function OnboardingStep2({
             Click to Link Account
           </Button>
         )}
+
+        <div className=" flex items-center space-x-4 rounded-md p-4">
+          <TradeControl user={user} />
+        </div>
       </CardFooter>
     </Card>
   );

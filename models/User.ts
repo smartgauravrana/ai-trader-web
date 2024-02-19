@@ -22,6 +22,8 @@ export interface UserMetadata {
   accessToken?: string;
 
   refreshToken?: string;
+
+  pauseTrades?: boolean;
 }
 
 export interface User {

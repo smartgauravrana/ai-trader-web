@@ -25,3 +25,13 @@ export const getBrokerLoginUrl = async () => {
     endpoint: "/api/broker/login-url",
   });
 };
+
+export const pauseTrades = async (userId: string, isPaused: boolean) => {
+  return apiCallV2({
+    endpoint: `/api/users/${userId}`,
+    data: {
+      pauseTrades: isPaused,
+    },
+    method: "PUT",
+  });
+};
