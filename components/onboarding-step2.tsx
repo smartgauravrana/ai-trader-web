@@ -55,7 +55,7 @@ export function OnboardingStep2({
         </div>
       </CardContent>
       <CardFooter>
-        {!user.metadata?.accessToken && (
+        {(!user.metadata?.accessToken || user.isTokenExpired) && (
           <Button className="mt-2" onClick={clickHandler}>
             {" "}
             Click to Link Account
