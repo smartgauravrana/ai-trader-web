@@ -39,9 +39,7 @@ async function Dashboard({}: Props) {
 
           <DashboardCard
             title="Users Refresh Token Expired"
-            value={numDifferentiation(
-              res.data.userCountWithExpiredRefreshToken
-            )}
+            value={nFormatter(res.data.userCountWithExpiredRefreshToken)}
             iconType="currency"
           />
         </div>
